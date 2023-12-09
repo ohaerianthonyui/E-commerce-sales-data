@@ -1,0 +1,39 @@
+-- Total sales revenue for the given period
+SELECT SUM(SALES) AS total_sales
+FROM salesdata;
+
+-- Sales performance by years
+SELECT YEAR_ID, SUM(SALES) AS total_sales
+FROM salesdata
+GROUP BY YEAR_ID
+;
+
+
+-- Product lines with highest and lowest sales volumes
+SELECT PRODUCTLINE, SUM(SALES) AS total_sales
+FROM salesdata
+GROUP BY PRODUCTLINE
+ORDER BY total_sales DESC;
+
+-- Average price for products within each product line
+SELECT PRODUCTLINE, ROUND(AVG(PRICEEACH)) AS avg_product_price
+FROM salesdata
+GROUP BY PRODUCTLINE
+ORDER BY avg_product_price DESC;
+
+-- Sales variation across countries and territories
+SELECT COUNTRY, TERRITORY, SUM(SALES) AS total_sales
+FROM salesdata
+GROUP BY COUNTRY, TERRITORY;
+
+-- Regions with high growth potential
+SELECT COUNTRY, TERRITORY, ROUND(AVG(SALES)) AS avg_sales
+FROM salesdata
+GROUP BY COUNTRY, TERRITORY
+ORDER BY avg_sales DESC;
+
+-- Seasonal variations in sales
+SELECT MONTH_ID, ROUND(AVG(SALES)) AS avg_monthly_sales
+FROM salesdata
+GROUP BY MONTH_ID
+ORDER BY avg_monthly_sales DESC;
